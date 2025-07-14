@@ -23,26 +23,12 @@ class Joke
     {
         $title = 'Database Barzellette';
 
+
         return ['template' => 'home.html.php', 'title' => $title];
     }
     public function list()
     {
-        $result = $this->jokesTable->findAll();
-
-        $jokes = [];
-
-        foreach ($result as $joke) {
-            $author = $this->authorTable->findById($joke['authorid']);
-
-            $jokes[] = [
-                'id' => $joke['id'],
-                'joketext' => $joke['joketext'],
-                'jokedate' => $joke['jokedate'],
-                'name' => $author['name'],
-                'email' => $author['email'],
-                'authorid' => $author['id']
-            ];
-        }
+        $jokes = $this->jokesTable->findAll();
 
         $totalJokes = $this->jokesTable->total();
 
@@ -54,7 +40,7 @@ class Joke
             'variables' => [
                 'totalJokes' => $totalJokes,
                 'jokes' => $jokes,
-                'userId' => $author['id'] ?? null
+                'userId' => $author->id ?? null
             ]
         ];
     }
@@ -75,7 +61,7 @@ class Joke
             'title' => $title,
             'variables' => [
                 'joke' => $joke ?? null,
-                'userId' => $author['id'] ?? null
+                'userId' => $author->id ?? null
             ]
         ];
     }
@@ -88,20 +74,18 @@ class Joke
         if (isset($_GET['id'])) {
             $joke = $this->jokesTable->findById($_GET['id']);
 
-            if ($joke['authorid'] != $author['id']) {
+            if ($joke->authorid != $author->id) {
                 return;
             }
         }
-        if (isset($_POST['joke'])) {
 
-            $joke = $_POST['joke'];
-            $joke['jokedate'] = new \DateTime();
-            $joke['authorid'] = $author['id'];
 
-            $this->jokesTable->save($joke);
+        $joke = $_POST['joke'];
+        $joke['jokedate'] = new \DateTime();
 
-            header('location: /joke/list');
-        }
+        $author->addJoke($joke);
+
+        header('location: /joke/list');
     }
 
     public function delete()
@@ -113,7 +97,7 @@ class Joke
         $joke = $this->jokesTable->findById($_POST['id']);
 
         //Controlla che l'id dell'utente connesso coincida con l'id della barzelletta da eliminare.
-        if ($joke['authorid'] != $author['id']) { 
+        if ($joke->authorid != $author->id) {
             return;
         }
 
