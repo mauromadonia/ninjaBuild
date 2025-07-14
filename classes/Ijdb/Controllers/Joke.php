@@ -46,11 +46,11 @@ class Joke
 
         $totalJokes = $this->jokesTable->total();
 
-        $title = 'Lista Barzellette';
+        $author = $this->authentication->getUser();
 
         return [
             'template' => 'jokes.html.php',
-            'title' => $title,
+            'title' => 'Lista Barzellette',
             'variables' => [
                 'totalJokes' => $totalJokes,
                 'jokes' => $jokes,
@@ -61,6 +61,8 @@ class Joke
 
     public function edit()
     {
+        $author = $this->authentication->getUser();
+
 
         if (isset($_GET['id'])) {
             $joke = $this->jokesTable->findById($_GET['id']);
@@ -73,6 +75,7 @@ class Joke
             'title' => $title,
             'variables' => [
                 'joke' => $joke ?? null,
+                'userId' => $author['id'] ?? null
             ]
         ];
     }
@@ -81,6 +84,14 @@ class Joke
     {
         $author = $this->authentication->getUser(); //Recupera l'utente connesso
 
+        //Controlla se l'id della barzelletta da modificare, coincide con l'id dell'utente connesso.
+        if (isset($_GET['id'])) {
+            $joke = $this->jokesTable->findById($_GET['id']);
+
+            if ($joke['authorid'] != $author['id']) {
+                return;
+            }
+        }
         if (isset($_POST['joke'])) {
 
             $joke = $_POST['joke'];
@@ -95,6 +106,17 @@ class Joke
 
     public function delete()
     {
+
+        $author = $this->authentication->getUser(); //Recupera l'utente connesso
+
+        //Recupera l'id della barzelletta che si vuole eliminare
+        $joke = $this->jokesTable->findById($_POST['id']);
+
+        //Controlla che l'id dell'utente connesso coincida con l'id della barzelletta da eliminare.
+        if ($joke['authorid'] != $author['id']) { 
+            return;
+        }
+
         $this->jokesTable->delete($_POST['id']);
 
         header('location: /joke/list');
