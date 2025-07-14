@@ -21,11 +21,13 @@ foreach ($jokes as $joke) : ?>
             </div>
         </div>
         <div class="blockquote__right">
-            <a href="/joke/edit?id=<?= $joke['id'] ?>" class="submit">Modifica</a>
-            <form action="/joke/delete" method="post">
-                <input type="hidden" name="id" value="<?= $joke['id'] ?>">
-                <input type="submit" value="Elimina">
-            </form>
+            <?php if ($userId == $joke['authorid']) : ?>
+                <a href="/joke/edit?id=<?= $joke['id'] ?>" class="submit">Modifica</a>
+                <form action="/joke/delete" method="post">
+                    <input type="hidden" name="id" value="<?= $joke['id'] ?>">
+                    <input type="submit" value="Elimina">
+                </form>
+            <?php endif; ?>
         </div>
     </blockquote>
 <?php endforeach ?>
