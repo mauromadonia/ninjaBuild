@@ -1,0 +1,213 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a,
+.navLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.navLink {
+  box-shadow: inset 0 0 0 0 rgb(173, 255, 47);
+  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Lato", serif;
+  font-weight: 400;
+  font-style: normal;
+  overflow-x: hidden;
+}
+
+input[type=submit],
+.submit {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.submit {
+  border: 1px solid black;
+}
+.submit:hover {
+  box-shadow: inset 200px 0 0 0 greenyellow;
+  color: black;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 1rem;
+  font-family: "Lato", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1rem;
+  background-color: #ececd5;
+  resize: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+form {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 2rem 0;
+}
+form label {
+  width: 100%;
+}
+form input[type=text],
+form input[type=password] {
+  padding: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+header {
+  padding: 3rem;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: greenyellow;
+  font-family: "Lato", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+nav {
+  width: 100%;
+  background-color: black;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 2rem;
+  list-style: none;
+  color: inherit;
+  color: white;
+  flex-wrap: wrap;
+}
+nav ul li a {
+  padding: 1rem;
+  transition: 0.3s ease-in-out;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+nav ul li a:hover {
+  box-shadow: inset 200px 0 0 0 greenyellow;
+  color: black;
+}
+
+main {
+  width: 100%;
+  padding: 3rem;
+  background-color: #f5f5dc;
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+}
+
+.blockquote {
+  padding: 1rem 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  border-left: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  margin: 2rem 0;
+  padding: 1rem 2rem;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
+}
+.blockquote__right, .blockquote__left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.blockquote__right a, .blockquote__left a {
+  text-decoration: none;
+}
+.blockquote__author, .blockquote__joke {
+  width: 100%;
+  display: flex;
+}
+.blockquote__author {
+  font-family: "Lato", serif;
+  font-weight: 700;
+  font-style: normal;
+  flex-direction: column;
+  align-items: left;
+}
+.blockquote__author p:nth-child(2) {
+  font-family: "Lato", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+.blockquote__joke {
+  justify-content: space-between;
+  align-items: center;
+}
+.blockquote p span {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+footer {
+  background-color: black;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errors {
+  padding: 1rem;
+  border: 1px solid red;
+  background-color: lightyellow;
+  color: red;
+  margin-bottom: 1rem;
+  overflow: auto;
+}
+.errors ul {
+  margin-left: 1rem;
+}
+.errors p {
+  margin-bottom: 1rem;
+}/*# sourceMappingURL=style.css.map */
