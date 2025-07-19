@@ -17,7 +17,10 @@
         <ul>
             <li><a class="navLink" href="/">Home</a></li>
             <li><a class="navLink" href="/joke/list">Barzellette</a></li>
-            <li><a class="navLink" href="/joke/edit">Aggiungi Barzelletta</a></li>
+            <?php if ($loggedIn) : ?>
+                <li><a class="navLink" href="/joke/edit">Aggiungi Barzelletta</a></li>
+                <li><a class="navLink" href="/category/list">Categorie</a></li>
+            <?php endif; ?>
         </ul>
         <ul>
             <?php if ($loggedIn) : ?>
