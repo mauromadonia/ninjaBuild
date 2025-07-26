@@ -186,4 +186,12 @@ class DatabaseTable
 
         return $entity;
     }
+
+    public function deleteWhere($column, $value)
+    {
+        $query = 'DELETE FROM `' . $this->table . '` WHERE ' . $column . ' =:value';
+        $parameters = ['value' => $value];
+
+        $query = $this->query($query, $parameters);
+    }
 }

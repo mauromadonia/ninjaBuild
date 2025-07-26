@@ -1,5 +1,16 @@
+<div class="jokeList">
+    <ul class="jokeList__categories">
+        <li><a href="/joke/list">Tutte</a>
+        </li>
+        <?php foreach ($categories as $category) : ?>
+            <li><a href="/joke/list?category=<?= $category->id ?>">
+                    <?= $category->name ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
 <p><?= $totalJokes ?> barzellette registrate nel Database.</p>
-
 <?php
 foreach ($jokes as $joke) : ?>
     <blockquote class="blockquote">
@@ -15,9 +26,12 @@ foreach ($jokes as $joke) : ?>
                 <p><?= htmlspecialchars($joke->getAuthor()->email, ENT_QUOTES, 'utf-8') ?></p>
             </div>
             <div class="blockquote__joke">
-                <p>
+                <p class="blockquote__joke__text">
                     <?= htmlspecialchars($joke->joketext, ENT_QUOTES, 'utf-8') ?>
                 </p>
+                <?php foreach ($categories as $category) : ?>
+                    <p class="blockquote__joke__cat"><?= $joke->getCategory($category->id)->name ?? '' ?></p>
+                <?php endforeach; ?>
             </div>
         </div>
         <div class="blockquote__right">

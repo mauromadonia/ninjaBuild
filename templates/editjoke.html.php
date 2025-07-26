@@ -5,11 +5,17 @@
         <textarea id="joketext" name="joke[joketext]"><?= $joke->joketext ?? '' ?></textarea>
         <p>Seleziona Categoria:</p>
         <?php foreach ($categories as $category) : ?>
-
-            <span>
-                <input type="checkbox" name="category[]" value="<?= $category->id ?>" id="category" />
-                <label id="category"><?= $category->name ?></label>
-            </span>
+            <?php if ($joke && $joke->hasCategory($category->id)) : ?>
+                <span>
+                    <input type="checkbox" checked name="category[]" value="<?= $category->id ?>" id="category" />
+                    <label id="category"><?= $category->name ?></label>
+                </span>
+            <?php else : ?>
+                <span>
+                    <input type="checkbox" name="category[]" value="<?= $category->id ?>" id="category" />
+                    <label id="category"><?= $category->name ?></label>
+                </span>
+            <?php endif; ?>
         <?php endforeach; ?>
         <input type="submit" name="submit" value="Salva">
     </form>

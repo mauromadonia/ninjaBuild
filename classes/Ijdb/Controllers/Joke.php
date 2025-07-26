@@ -35,7 +35,13 @@ class Joke
     }
     public function list()
     {
-        $jokes = $this->jokesTable->findAll();
+        if (isset($_GET['category'])) {
+            $category = $this->categoriesTable->findById($_GET['category']);
+            $jokes = $category->getJokes();
+        } else {
+            $jokes = $this->jokesTable->findAll();
+        }
+
 
         $totalJokes = $this->jokesTable->total();
 
@@ -47,7 +53,8 @@ class Joke
             'variables' => [
                 'totalJokes' => $totalJokes,
                 'jokes' => $jokes,
-                'userId' => $author->id ?? null
+                'userId' => $author->id ?? null,
+                'categories' => $this->categoriesTable->findAll(),
             ]
         ];
     }
@@ -94,7 +101,9 @@ class Joke
 
         $jokeEntity = $author->addJoke($joke);
 
-        foreach($_POST['category'] as $categoryid){
+        $jokeEntity->clearCategories(); // elimina tutte le categorie della barzelletta
+
+        foreach ($_POST['category'] as $categoryid) { // aggiunge le categorie selezionate
             $jokeEntity->addCategory($categoryid);
         }
 
